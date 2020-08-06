@@ -1,29 +1,52 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <v-app>
+    <v-app-bar
+      id="app-bar"
+      app
+      color="white"
+      light
+      dense
+      flat
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title>Notes</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <BlockList/>
+    </v-main>
+  </v-app>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
+import { Component, Vue } from 'vue-property-decorator'
 
+import BlockList from '@/components/BlockList.vue';
 @Component({
   components: {
-    HelloWorld
+    BlockList
   }
 })
-export default class App extends Vue {}
-</script>
+export default class App extends Vue {
+  public nBlocks = 1;
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  public addTextBlock() {
+    this.nBlocks++;
+  }
+}
+</script>
+<style lang="scss">
+#app-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  border-bottom: 2px solid rgba(0, 0, 0, .3);
+}
+
+.text-box:focus {
+  outline: none;
 }
 </style>
